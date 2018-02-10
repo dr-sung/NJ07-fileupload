@@ -4,14 +4,14 @@
     </head>
     <body>
         <h1>File Upload</h1>
-        <%= typeof msg != null ? msg : '' %>
+        <%= msg ? msg : '' %>
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="uploadedFile"><br>
             <button type="submit">Submit</button>
         </form>
         <br>
-        <% if (file != null) { %>
-            <img src="<%= file %>" width="500" height="500">
+        <% if (filename != null) { %>
+            <img src="<%= filename %>" width="500" height="500">
         <% } %>
     </body>
 </html>

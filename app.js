@@ -39,23 +39,22 @@ app.set('views', './views');
 app.use(express.static('./public'));
 
 app.get('/', (req, res) => {
-    console.log('/ GET');
-    res.render('index', {msg: null, file: null});
+    res.render('index', {msg: null, filename: null});
 });
 
 app.post('/upload', (req, res) => {
     upload(req, res, (err) => {
         if (err) {
-            return res.render('index', { msg: err, file: null });
+            return res.render('index', { msg: err, filename: null });
         }
         if (!req.file) {
             return res.render('index', {
-                msg: 'Error: no file selected', file: null
+                msg: 'Error: no file selected', filename: null
             });
         }
         res.render('index', {
             msg: 'File Uploded!',
-            file: `uploads/${req.file.filename}`
+            filename: `uploads/${req.file.filename}`
         });
     });
 });
