@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const ejs = require('ejs');
 const path = require('path');
+const uploadImagePrefix = 'image-';
 
 // set storage options of multer
 const storageOptions = multer.diskStorage({
@@ -9,8 +10,7 @@ const storageOptions = multer.diskStorage({
         callback(null, './public/uploads');
     },
     filename: (req, file, callback) => {
-        callback(null, file.fieldname // fieldname == form parameter name
-            + '-' + Date.now()
+        callback(null, uploadImagePrefix + Date.now()
             + path.extname(file.originalname));
     }
 });
@@ -31,7 +31,7 @@ const upload = multer({
             return callback('Error: Images only');
         }
     }
-}).single('uploadedFile'); // parameter name at <form>
+}).single('imageUpload'); // parameter name at <form> of index.ejs
 
 const app = express();
 app.set('view engine', 'ejs');
